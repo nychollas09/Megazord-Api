@@ -1,5 +1,7 @@
 package br.com.falcao.megazordapi.domain.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +21,9 @@ import lombok.Setter;
 @Table(name = "categoria")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Categoria {
+public class Categoria extends ResourceSupport implements Serializable {
+
+	private static final long serialVersionUID = 1L;
 
 	@Id
 	@EqualsAndHashCode.Include
