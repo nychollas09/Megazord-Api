@@ -21,10 +21,10 @@ import lombok.Setter;
 @Table(name = "categoria")
 @Getter @Setter @NoArgsConstructor @AllArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
-public class Categoria extends ResourceSupport implements Serializable {
+public class Categoria implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@EqualsAndHashCode.Include
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
