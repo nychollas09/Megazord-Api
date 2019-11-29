@@ -8,8 +8,6 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Version;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import br.com.falcao.megazordapi.domain.dto.CategoriaDTO;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -24,7 +22,6 @@ import lombok.Setter;
 public class Categoria {
 
 	@Id
-	@JsonProperty("id")
 	@EqualsAndHashCode.Include
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long codigo;
