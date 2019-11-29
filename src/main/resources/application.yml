@@ -1,0 +1,11 @@
+server:  port: 8055  servlet:    context-path: /megazord-api
+spring:  resources:    add-mappings: false
+  datasource:    url: jdbc:mysql://localhost/megazordapi?createDatabaseIfNotExist=true&useSSL=false&useTimezone=true&serverTimezone=America/Fortaleza&allowPublicKeyRetrieval=true
+    username: root
+    password: 1234
+  jpa:
+    database: MYSQL
+    show-sql: true    hibernate:      ddl-auto: none    properties:      hibernate:
+        dialect: org.hibernate.dialect.MySQL57Dialect
+  jackson:    deserialization:
+      fail-on-unknown-properties: true      fail-on-ignored-properties: true
