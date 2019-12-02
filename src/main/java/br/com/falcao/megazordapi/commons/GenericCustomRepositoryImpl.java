@@ -4,10 +4,12 @@ import java.io.Serializable;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 
-import org.hibernate.SQLQuery;
 import org.hibernate.Session;
-import org.hibernate.transform.ResultTransformer;
 
 public class GenericCustomRepositoryImpl<T, ID extends Serializable> {
 
@@ -22,11 +24,19 @@ public class GenericCustomRepositoryImpl<T, ID extends Serializable> {
 		return this.entityManager.unwrap(Session.class);
 	}
 	
-	public SQLQuery createSQLQuery(StringBuilder stb, ResultTransformer resultTransformer) {
-		SQLQuery query = getSession().createSQLQuery(stb.toString());
-		query.setResultTransformer(resultTransformer);
+	public TypedQuery<T> createSQLQuery(StringBuilder stb, Class<T> resultTransformer) {
+		//Query query = this.getSession().createSQLQuery(stb.toString());
+		//query.setResultTransformer(resultTransformer);
+		/*Query query;
+		query.value(stb.toString());
+		query.nativeQuery(true);*/
+		CriteriaBuilder criteriaBuilder = this.getEntityManager().getCriteriaBuilder();
+		CriteriaQuery<T> criteriaQuery = criteriaBuilder.createQuery(resultTransformer);
+		Root<T> transform = criteriaQuery.from(resultTransformer);
+		criteriaQuery.select(transform);
 		
-		return query;
+		TypedQuery<T> typedQuery = this.getEntityManager().createQuery(criteriaQuery);
+		return typedQuery;
 	}
 	
 }
